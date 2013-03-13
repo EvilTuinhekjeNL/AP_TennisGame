@@ -2,6 +2,7 @@ package Test;
 
 import TennisGame.TennisGame;
 import junit.framework.TestCase;
+import TennisGame.*;
 
 public class TennisGameTest extends TestCase{
 	
