@@ -1,6 +1,5 @@
 package Test;
 
-import TennisGame.TennisGame;
 import junit.framework.TestCase;
 import TennisGame.*;
 
