@@ -1,15 +1,16 @@
-package Test;
+package test;
 
 import org.junit.*;
 
-import TennisGame.TennisGame;
+import tennisgame.Game;
+
 
 public class TennisGameTest {
-	TennisGame game;
+	Game game;
 	
 	@Before
 	public void setup() throws Exception{
-		game = new TennisGame();
+		game = new Game();
 		game.setUp();
 	}
 	
@@ -29,10 +30,15 @@ public class TennisGameTest {
 	}
 	
 	public void testMatchPoint() throws Exception {
+		for (int i = 0; i < 4; i++) { // 0, 15 [0], 30 [1], 40 [2], 0 (match point) [3]
+			game.score("sideA");
+		}
 		
+		int[] matchPoints = game.getMatchPoints();
+		//assertEquals(points[0], 1);
 	}
 	
-	public boolean evaluateScore(TennisGame game, int expectedSideA, int expectedSideB) throws Exception{
+	public boolean evaluateScore(Game game, int expectedSideA, int expectedSideB) throws Exception{
 		int[] score = game.getScore();
 		return score[0] == expectedSideA && score[1] == expectedSideB;
 	}
