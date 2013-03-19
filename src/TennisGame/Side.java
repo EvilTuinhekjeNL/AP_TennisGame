@@ -15,9 +15,9 @@ public class Side {
 			points += 15;
 		else if (points < 40)
 			points += 10;
-		else {
-			points = 0;
+		else if (points-25 >= opponent.getPoints()){
 			games += 1;
+			points = 0;
 			// TODO: Implement match points
 			// TODO: Implement Deuce
 			// TODO: Implement Match/Game
