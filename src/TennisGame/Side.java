@@ -10,7 +10,7 @@ public class Side {
 		this.games = 0;
 	}
 	
-	public void incrementScore() {
+	public void incrementScore(Side opponent) {
 		if (points < 30)
 			points += 15;
 		else if (points < 40)
@@ -25,8 +25,11 @@ public class Side {
 		}
 	}
 
-	public int[] getMatchPoints() {
-		// TODO Auto-generated method stub
-		return null;
+	public int getMatchPoints() {
+		return this.games;
+	}
+	
+	public int getPoints() {
+		return this.points;
 	}
 }

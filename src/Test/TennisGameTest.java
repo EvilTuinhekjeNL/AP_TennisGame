@@ -39,7 +39,7 @@ public class TennisGameTest {
 	}
 	
 	public boolean evaluateScore(Game game, int expectedSideA, int expectedSideB) throws Exception{
-		int[] score = game.getScore();
+		int[] score = game.getPoints();
 		return score[0] == expectedSideA && score[1] == expectedSideB;
 	}
 }

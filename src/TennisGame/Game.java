@@ -1,22 +1,26 @@
 package tennisgame;
 
 public class Game {
-	private int sideA, sideB;
+	private Side sideA, sideB;
 	
 	public void setUp(){
-		sideA = 0;
-		sideB = 0;
+		sideA = new Side();
+		sideB = new Side();
 	}
 	
-	public int[] getScore(){
-		return new int[]{ sideA, sideB };
+	public int[] getPoints(){
+		return new int[]{ sideA.getPoints(), sideB.getPoints() };
+	}
+	
+	public int[] getMatchPoints() {
+		return new int[]{ sideA.getMatchPoints(), sideB.getMatchPoints() };
 	}
 
 	public void score(String side) throws Exception {
 		if(side.toLowerCase().equals("sidea")){
-			sideA = incrementScore(sideA);
+			sideA.incrementScore(sideB);
 		} else if (side.toLowerCase().equals("sideb")) {
-			sideB = incrementScore(sideB);
+			sideB.incrementScore(sideA);
 		} else {
 			throw new Exception("Fuck yo couch!");
 		}
