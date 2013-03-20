@@ -17,14 +17,12 @@ public class TennisGameTest {
 	}
 	
 	@Test
-	public void testTennisGame() throws Exception{
-		//TennisGame game = setup();
+	public void testInitialSituation() throws Exception{
 		assertTrue(evaluateScore(game.getPoints(), 0, 0));
 	}
 	
 	@Test
-	public void testTennisScore() throws Exception{
-		//TennisGame game = setup();
+	public void testPoints() throws Exception{
 		game.score("sideA");
 		game.score("sideA");
 		game.score("sideB");
@@ -32,12 +30,12 @@ public class TennisGameTest {
 	}
 	
 	@Test
-	public void testMatchPoint() throws Exception {
+	public void testGame() throws Exception {
 		for (int i = 0; i < 4; i++) { // 0, 15 [0], 30 [1], 40 [2], 0 (match point) [3]
 			game.score("sideA");
 		}
 		
-		assertTrue(evaluateScore(game.getMatches(), 1, 0));
+		assertTrue(evaluateScore(game.getGames(), 1, 0));
 	}
 	
 	@Test
@@ -48,17 +46,18 @@ public class TennisGameTest {
 		}
 		
 		// Player a should have the advantage
-		assertTrue(evaluateScore(game.getMatches(), 0, 0));
+		assertTrue(evaluateScore(game.getGames(), 0, 0));
 		
 		game.score("sidea");
 		// Player a should now have a match point
-		assertTrue(evaluateScore(game.getMatches(), 1, 0));
+		assertTrue(evaluateScore(game.getGames(), 1, 0));
 	}
 	
 	@Test
 	public void testSet() throws Exception {
-		for (int i = 0; i < (4*6); i++) {
-			game.score("sidea");
+		for (int i = 0; i < 6; i++) {
+			//game.score("sidea");
+			incrementToGame("sidea");
 		}
 		
 		assertTrue(evaluateScore(game.getSets(), 1, 0));
@@ -67,22 +66,29 @@ public class TennisGameTest {
 	@Test
 	public void testTieBreak() throws Exception {
 		for (int i = 0; i < 6; i++) {
-			incrementToMatch("sidea");
-			incrementToMatch("sideb");
-			//System.out.println(game.getMatches()[0]);
+			incrementToGame("sidea");
+			incrementToGame("sideb");
 		}
 		
-		//System.out.println(game.getMatches()[0]);
-		//System.out.println(game.getSets()[0]);
 		// At this point we have a tie break.
 		assertTrue(evaluateScore(game.getSets(), 0, 0));
 		
-		incrementToMatch("sidea");
+		incrementToGame("sidea");
 		// This should win the set
 		assertTrue(evaluateScore(game.getSets(), 1, 0));
 	}
 	
-	public void incrementToMatch(String side) throws Exception {
+	@Test
+	public void testWin() throws Exception {
+		for (int i = 0; i < (6*3); i++) {
+			incrementToGame("sidea");
+		}
+		
+		assertTrue(game.isWin());
+		assertTrue(game.getWinner().toLowerCase().contains("a"));
+	}
+	
+	public void incrementToGame(String side) throws Exception {
 		for (int i = 0; i < 4; i++) {
 			game.score(side);
 		}

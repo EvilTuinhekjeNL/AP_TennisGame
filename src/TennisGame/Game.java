@@ -11,12 +11,26 @@ public class Game {
 		this.maxSets = sets;
 	}
 	
+	public boolean isWin() {
+		return (this.sideA.getSets() >= this.maxSets) || (this.sideB.getSets() >= this.maxSets);
+	}
+	
+	public String getWinner() {
+		if (this.sideA.getSets() >= this.maxSets) {
+			return "Side A";
+		} else if (this.sideB.getSets() >= this.maxSets) {
+			return "Side B";
+		} else {
+			return "None";
+		}
+	}
+	
 	public int[] getPoints(){
 		return new int[]{ sideA.getPoints(), sideB.getPoints() };
 	}
 	
-	public int[] getMatches() {
-		return new int[]{ sideA.getMatches(), sideB.getMatches() };
+	public int[] getGames() {
+		return new int[]{ sideA.getGames(), sideB.getGames() };
 	}
 	
 	public int[] getSets() {

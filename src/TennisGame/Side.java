@@ -2,13 +2,13 @@ package tennisgame;
 
 public class Side {
 	private int points;
-	private int matches;
+	private int games;
 	private boolean advantage;
 	private int sets;
 	
 	public Side() {
 		this.points = 0;
-		this.matches = 0;
+		this.games = 0;
 		this.advantage = false;
 	}
 	
@@ -22,7 +22,7 @@ public class Side {
 		// else check if the 4th point puts us two ahead. If yes, score game
 		else if (points-15 >= opponent.getPoints()) {
 			points = 0;
-			incrementMatches(opponent);
+			incrementGames(opponent);
 		// if no, we must be at a min 3, 4th point situation. The person in question gets the advantage,
 			// take it from the other person if needs be.
 		} else if (!this.advantage) {
@@ -33,26 +33,33 @@ public class Side {
 			this.advantage = false;
 			opponent.advantage = false;
 			points = 0;
-			incrementMatches(opponent);
+			incrementGames(opponent);
 		}
 	}
 	
-	private void incrementMatches(Side opponent) {
-		if (this.matches < 5) {
-			this.matches += 1;
-		} else if (this.matches > opponent.getMatches() && this.matches >= 5) {
-			this.matches = 0;
+	private void incrementGames(Side opponent) {
+		if (this.games < 5) {
+			this.games += 1;
+		} else if (this.games > opponent.getGames() && this.games >= 5) {
+			this.games = 0;
+			opponent.games = 0;
 			incrementSets(opponent);
+			// This is Tie-break logic. There are variants, but this is the way it usually works
+		} else if (this.games > 5 && opponent.getGames() > 5) {
+			this.games = 0;
+			opponent.games = 0;
+			incrementSets(opponent);
+		} else if (this.games >= 5 && opponent.games >= 5) {
+			this.games += 1;
 		}
-		// TODO: Sets
 	}
 
 	private void incrementSets(Side opponent) {
 		this.sets += 1;
 	}
 
-	public int getMatches() {
-		return this.matches;
+	public int getGames() {
+		return this.games;
 	}
 	
 	public int getPoints() {
