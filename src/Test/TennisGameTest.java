@@ -40,6 +40,21 @@ public class TennisGameTest {
 		assertTrue(evaluateScore(game.getMatchPoints(), 1, 0));
 	}
 	
+	@Test
+	public void testAdvantage() throws Exception {
+		for (int i = 0; i < 4; i++) {
+			game.score("sideb");
+			game.score("sidea");
+		}
+		
+		// Player a should have the advantage
+		assertTrue(evaluateScore(game.getMatchPoints(), 0, 0));
+		
+		game.score("sidea");
+		// Player a should now have a match point
+		assertTrue(evaluateScore(game.getMatchPoints(), 1, 0));
+	}
+	
 	public boolean evaluateScore(int[] scores, int expectedSideA, int expectedSideB) throws Exception{
 		return scores[0] == expectedSideA && scores[1] == expectedSideB;
 	}
