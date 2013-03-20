@@ -2,18 +2,25 @@ package tennisgame;
 
 public class Game {
 	private Side sideA, sideB;
+	private int maxSets;
 	
-	public void setUp(){
+	public void setUp(int sets){
 		sideA = new Side();
 		sideB = new Side();
+		
+		this.maxSets = sets;
 	}
 	
 	public int[] getPoints(){
 		return new int[]{ sideA.getPoints(), sideB.getPoints() };
 	}
 	
-	public int[] getMatchPoints() {
-		return new int[]{ sideA.getMatchPoints(), sideB.getMatchPoints() };
+	public int[] getMatches() {
+		return new int[]{ sideA.getMatches(), sideB.getMatches() };
+	}
+	
+	public int[] getSets() {
+		return new int[]{sideA.getSets(), sideB.getSets()};
 	}
 
 	public void score(String side) throws Exception {

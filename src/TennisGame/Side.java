@@ -2,13 +2,13 @@ package tennisgame;
 
 public class Side {
 	private int points;
-	private int games;
+	private int matches;
 	private boolean advantage;
-	// TODO: Needs sets
+	private int sets;
 	
 	public Side() {
 		this.points = 0;
-		this.games = 0;
+		this.matches = 0;
 		this.advantage = false;
 	}
 	
@@ -21,12 +21,8 @@ public class Side {
 			points += 10;
 		// else check if the 4th point puts us two ahead. If yes, score game
 		else if (points-15 >= opponent.getPoints()) {
-			games += 1;
 			points = 0;
-			// TODO: Implement match points
-			// TODO: Implement Deuce
-			// TODO: Implement Match/Game
-			// TODO: Score
+			incrementMatches(opponent);
 		// if no, we must be at a min 3, 4th point situation. The person in question gets the advantage,
 			// take it from the other person if needs be.
 		} else if (!this.advantage) {
@@ -37,15 +33,33 @@ public class Side {
 			this.advantage = false;
 			opponent.advantage = false;
 			points = 0;
-			games += 1;
+			incrementMatches(opponent);
 		}
 	}
+	
+	private void incrementMatches(Side opponent) {
+		if (this.matches < 5) {
+			this.matches += 1;
+		} else if (this.matches > opponent.getMatches() && this.matches >= 5) {
+			this.matches = 0;
+			incrementSets(opponent);
+		}
+		// TODO: Sets
+	}
 
-	public int getMatchPoints() {
-		return this.games;
+	private void incrementSets(Side opponent) {
+		this.sets += 1;
+	}
+
+	public int getMatches() {
+		return this.matches;
 	}
 	
 	public int getPoints() {
 		return this.points;
+	}
+
+	public int getSets() {
+		return this.sets;
 	}
 }
