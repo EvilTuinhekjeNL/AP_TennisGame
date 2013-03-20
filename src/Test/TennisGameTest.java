@@ -79,13 +79,41 @@ public class TennisGameTest {
 	}
 	
 	@Test
-	public void testWin() throws Exception {
+	public void testWinA() throws Exception {
 		for (int i = 0; i < (6*3); i++) {
 			incrementToGame("sidea");
 		}
 		
 		assertTrue(game.isWin());
 		assertTrue(game.getWinner().toLowerCase().contains("a"));
+	}
+	
+	@Test
+	public void testWinB() throws Exception {
+		for (int i = 0; i < (6*3); i++) {
+			incrementToGame("sideb");
+		}
+		
+		assertTrue(game.isWin());
+		assertTrue(game.getWinner().toLowerCase().contains("b"));
+	}
+	
+	@Test
+	public void testWinNone() throws Exception {
+		assertFalse(game.isWin());
+		assertTrue(game.getWinner().toLowerCase().equals("none"));
+	}
+	
+	@Test
+	public void testScoreWrong() throws Exception {
+		String exceptionMsg = "";
+		try {
+			game.score("sideC");
+		} catch (Exception e) {
+			exceptionMsg = e.getMessage().toLowerCase();
+		}
+		
+		assertTrue(exceptionMsg.contains("side does not exist"));
 	}
 	
 	public void incrementToGame(String side) throws Exception {

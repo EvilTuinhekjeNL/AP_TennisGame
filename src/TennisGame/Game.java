@@ -1,5 +1,7 @@
 package tennisgame;
 
+import java.util.InputMismatchException;
+
 public class Game {
 	private Side sideA, sideB;
 	private int maxSets;
@@ -43,7 +45,7 @@ public class Game {
 		} else if (side.toLowerCase().equals("sideb")) {
 			sideB.incrementScore(sideA);
 		} else {
-			throw new Exception("Fuck yo couch!");
+			throw new InputMismatchException("Side does not exist, sidea or sideb");
 		}
 	}
 }
